@@ -1,0 +1,20 @@
+<form ng-submit="register()">
+    <label>Username
+        <input type="text" ng-model="newUserData.username">
+    </label>
+    <label>Password
+        <input type="password" ng-model="newUserData.password">
+    </label>
+    <label>Confirm Password
+        <input type="password" ng-model="newUserData.confirmPassword">
+    </label>
+    <label>Full Name
+        <input type="text" ng-model="newUserData.fullname">
+    </label>
+    <label>Email
+        <input type="email" ng-model="newUserData.email">
+    </label>
+    <button>Register</button>
+</form>
+
+<button class="btn btn-default" ui-sref="logins">Login</button>

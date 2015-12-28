@@ -1,0 +1,33 @@
+<div>
+    <label> Boxer1:
+        <span>{{match.Boxer1}}</span>
+    </label>
+</div>
+<div>
+    <label> Boxer2:
+        <span>{{match.Boxer2}}</span>
+    </label>
+</div>
+<div>
+    <label> Place:
+        <span>{{match.Place}}</span>
+    </label>
+</div>
+<div>
+    <label> DateOfMatch:
+        <span>{{match.DateOfMatch}}</span>
+    </label>
+</div>
+<div>
+    <label> Dsecription:
+        <span>{{match.Dsecription}}</span>
+    </label>
+</div>
+<div>
+    <label> Winner:
+        <input type="text" ng-model="match.Winner">
+    </label>
+</div>
+
+<button class="btn btn-default" ng-click="saveBoxingResult()">Save</button>
+<button class="btn btn-default" ng-click="cancelMatch()">Cancel Match</button>

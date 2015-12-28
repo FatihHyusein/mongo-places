@@ -1,0 +1,27 @@
+<div>
+    <select ng-model="filters.take" ng-change="getUsers()">
+        <option value="5" ng-selected="true">5</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+    </select>
+
+    <table class="table table-hover table-striped">
+        <thead>
+        <tr>
+            <th ng-click="getUsers({sort:'FullName'})">Full Name</th>
+            <th ng-click="getUsers({sort:'Username'})">Username</th>
+            <th ng-click="getUsers({sort:'Rating'})">Rating</th>
+        </tr>
+        </thead>
+        <tr ng-repeat="user in users" ui-sref="users.detail({id:user.Id})">
+            <td>{{user.FullName}}</td>
+            <td>{{user.Username}}</td>
+            <td>{{user.Rating.Rating}}</td>
+        </tr>
+    </table>
+
+    <div class="pull-right">
+        <button class="btn btn-default" ng-click="getUsers({page: 'previous'})">Previous Page</button>
+        <button class="btn btn-default" ng-click="getUsers({page: 'next'})">Next Page</button>
+    </div>
+</div>

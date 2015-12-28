@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="boxing" class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Boxing</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Styles-->
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="lib/html5-boilerplate/dist/css/normalize.css">
+    <link rel="stylesheet" href="lib/html5-boilerplate/dist/css/main.css">
+    <link rel="stylesheet" href="app/app.css">
+    <!--END Styles-->
+
+    <script src="lib/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
+<body>
+
+<!-- Top Navigation-->
+<!--navbar-inverse use for night-->
+<nav class="navbar navbar-default navbar-fixed-top " ng-controller="MainCtrl">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" ui-sref="home">
+                <img ng-src="../images/logo.jpg" alt="logo" style="width: 40px; height: 20px;">
+            </a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li ng-class="{active: $state.includes('matches')}"><a ui-sref="matches.list">Matches</a></li>
+                <li ng-class="{active: $state.includes('users')}"><a ui-sref="users.list">Users</a></li>
+            </ul>
+            <form class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search" ng-model="searchInput">
+                </div>
+                <button type="submit" class="btn btn-default" ng-click="search(searchInput)">Search</button>
+            </form>
+
+            <div ng-if="!loggedInUser">
+                <a ui-sref="logins" class="btn btn-default navbar-btn navbar-right">Login</a>
+            </div>
+            <div ng-if="loggedInUser">
+                <a class="btn btn-default navbar-btn navbar-right" ng-click="logout()">Logout</a>
+            </div>
+        </div>
+    </div>
+</nav>
+<!-- END TOP NAVIGATION -->
+
+<div ui-view class="container slide" style="padding-top: 70px"></div>
+
+<!-- Libraries -->
+<script src="lib/jquery/dist/jquery.js"></script>
+<script src="lib/bootstrap/dist/js/bootstrap.js"></script>
+<script src="lib/angular/angular.js"></script>
+<script src="lib/angular-animate/angular-animate.js"></script>
+<script src="lib/angular-loader/angular-loader.js"></script>
+<script src="lib/angular-resource/angular-resource.js"></script>
+<script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="lib/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+<!-- END Libraries -->
+
+<script src="app/app.js"></script>
+<script src="app/services.js"></script>
+<script src="app/resources.js"></script>
+<script src="app/pages/login/login.js"></script>
+<script src="app/pages/home/home.js"></script>
+<script src="app/pages/users/users.js"></script>
+<script src="app/pages/matches/matches.js"></script>
+</body>
+</html>

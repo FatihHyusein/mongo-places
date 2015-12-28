@@ -1,0 +1,29 @@
+<div>
+    <label> Full Name:
+        <span>{{user.FullName}}</span>
+    </label>
+</div>
+<div>
+    <label> Username:
+        <span>{{user.Username}}</span>
+    </label>
+</div>
+<div>
+    <label> Rating:
+        <span>{{user.Rating}}</span>
+    </label>
+</div>
+
+<button class="btn btn-default" ui-sref="users.edit({id:user.Id})">Edit</button>
+
+<button class="btn btn-default" ng-click="removeUser(user.Id)">Remove</button>
+
+<div ng-repeat="prediction in user.Predictions">
+    <p>{{prediction.MatchId}}</p>
+    <label> Boxer1:
+        <input type="radio" ng-model="prediction.Winner" value="1">
+    </label>
+    <label> Boxer 2:
+        <input type="radio" ng-model="prediction.Winner" value="2">
+    </label>
+</div>

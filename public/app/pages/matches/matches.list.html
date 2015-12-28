@@ -1,0 +1,35 @@
+<div>
+    <select ng-model="filters.take" ng-change="getMatches()">
+        <option value="5" ng-selected="true">5</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+    </select>
+    <button class="btn btn-default" ng-click="getPendingPastMatches()">Get Pending Past Matches</button>
+
+    <table class="table table-hover table-striped">
+        <thead>
+        <tr>
+            <th ng-click="getMatches({sort:'Boxer1'})">Boxer 1</th>
+            <th ng-click="getMatches({sort:'Boxer2'})">Boxer 2</th>
+            <th ng-click="getMatches({sort:'Place'})">Place</th>
+            <th ng-click="getMatches({sort:'DateOfMatch'})">Date Of Match</th>
+            <th ng-click="getMatches({sort:'Dsecription'})">Dsecription</th>
+            <th ng-click="getMatches({sort:'Winner'})">Winner</th>
+        </tr>
+        </thead>
+        <tr ng-repeat="match in matches" ui-sref="matches.detail({id:match.Id})">
+            <td>{{match.Boxer1}}</td>
+            <td>{{match.Boxer2}}</td>
+            <td>{{match.Place}}</td>
+            <td>{{match.DateOfMatch}}</td>
+            <td>{{match.Dsecription}}</td>
+            <td>{{match.Winner}}</td>
+        </tr>
+    </table>
+
+    <div class="pull-right">
+        <button class="btn btn-default" ng-click="getMatches({page: 'previous'})">Previous Page</button>
+        <button class="btn btn-default" ng-click="getMatches({page: 'next'})">Next Page</button>
+    </div>
+    <button class="btn btn-default" ui-sref="matches.add()">Add</button>
+</div>
