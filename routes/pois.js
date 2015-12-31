@@ -10,6 +10,13 @@ var rm = require('../models/reqDataMapper');
 
 
 router.post('/', auth, function (req, res, next) {
+    console.log('****')
+    console.log(req.body.name)
+    console.log('****')
+    console.log(req.body.coordinates)
+    console.log('****')
+    console.log(req.body)
+
     if (!req.body.name || !req.body.coordinates || !req.body.type) {
         return res.status(400).json({message: 'Please fill out all fields'});
     }
@@ -42,7 +49,11 @@ router.get('/:poiId', auth, function (req, res, next) {
             return next(err);
         }
 
-        res.json(poi);
+        poi.populate('owner', function(err, p) {
+            if (err) { return next(err); }
+
+            res.json(p);
+        });
     });
 });
 

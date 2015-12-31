@@ -23,17 +23,18 @@ angular.module('boxing.pois', ['ui.router'])
                                 }]
                         },
 
-                        controller: ['$scope',
-                            function ($scope) {
+                        controller: ['$scope', 'gmapsSvc',
+                            function ($scope, gmapsSvc) {
                                 $scope.pois = [];
+                                gmapsSvc.refresh(39.50, -98.35);
                             }]
                     })
 
                     .state('pois.list', {
                         url: '',
                         templateUrl: 'app/pages/pois/pois.list.html',
-                        controller: ['$scope','$rootScope', '$state', 'Poi',
-                            function ($scope,$rootScope, $state, Poi) {
+                        controller: ['$scope', '$rootScope', '$state', 'Poi',
+                            function ($scope, $rootScope, $state, Poi) {
                                 var currentPage = 0;
                                 $scope.filters = {
                                     skip: 0,
@@ -138,7 +139,9 @@ angular.module('boxing.pois', ['ui.router'])
                                 templateUrl: 'app/pages/pois/details/pois.add.html',
                                 controller: ['$scope', '$stateParams', '$state', 'Poi',
                                     function ($scope, $stateParams, $state, Poi) {
-                                        $scope.poi = {};
+                                        $scope.poi = {
+                                            coordinates:[]
+                                        };
 
                                         $scope.add = function () {
                                             Poi.create({},

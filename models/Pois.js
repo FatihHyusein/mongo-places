@@ -1,9 +1,9 @@
 var mongoose = require('mongoose');
 
 var PoiSchema = new mongoose.Schema({
-    name: {type: String, required:true},
-    coordinates: {type: String, required:true},
-    type: {type: String, required:true},
+    name: {type: String, required: true},
+    coordinates: {type: [Number], required: true},
+    type: {type: String, required: true},
     description: String,
     workTime: String,
     rating: Number,
@@ -11,7 +11,14 @@ var PoiSchema = new mongoose.Schema({
     priceCategory: String,
     seatsCount: String,
     additionalInformation: String,
-    owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
+    owner: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
 });
+
+//PoiSchema.pre('save', function (next) {
+//
+//    next();
+//});
+
+PoiSchema.index({coordinates: '2dsphere'});
 
 exports.Poi = mongoose.model('Poi', PoiSchema);
