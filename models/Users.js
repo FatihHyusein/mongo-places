@@ -4,7 +4,7 @@ var jwt = require('jsonwebtoken');
 
 
 var UserSchema = new mongoose.Schema({
-    username: {type: String, lowercase: true, unique: true},
+    username: {type: String, lowercase: true, unique: true, required:true},
     fullname: String,
     hash: String,
     salt: String,
@@ -14,7 +14,8 @@ var UserSchema = new mongoose.Schema({
         unique: true,
         required: 'Email address is required',
         match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
-    }
+    },
+    favoritePlaces: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Poi' }]
 });
 
 UserSchema.methods.setPassword = function (password) {

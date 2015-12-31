@@ -1,0 +1,29 @@
+<div>
+    <select ng-model="filters.take" ng-change="getPois()">
+        <option value="5" ng-selected="true">5</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+    </select>
+
+    <table class="table table-hover table-striped">
+        <thead>
+        <tr>
+            <th ng-click="getPois({sort:'name'})">Name</th>
+            <th ng-click="getPois({sort:'coordinates'})">Coordinates</th>
+            <th ng-click="getPois({sort:'type'})">Type</th>
+        </tr>
+        </thead>
+        <tr ng-repeat="poi in pois" ui-sref="pois.detail({poiId:poi._id})">
+            <td>{{poi.name}}</td>
+            <td>{{poi.coordinates}}</td>
+            <td>{{poi.type}}</td>
+        </tr>
+    </table>
+
+    <button class="btn btn-default" ui-sref="pois.add()">Add</button>
+
+    <div class="pull-right">
+        <button class="btn btn-default" ng-click="getPois({page: 'previous'})">Previous Page</button>
+        <button class="btn btn-default" ng-click="getPois({page: 'next'})">Next Page</button>
+    </div>
+</div>

@@ -1,0 +1,33 @@
+<div>
+    <label> Name:
+        <span>{{poi.name}}</span>
+    </label>
+</div>
+<div>
+    <label> Coordinates:
+        <span>{{poi.coordinates}}</span>
+    </label>
+</div>
+<div>
+    <label> Type:
+        <span>{{poi.type}}</span>
+    </label>
+</div>
+
+<div>
+    <label> Description:
+        <span>{{poi.description}}</span>
+    </label>
+</div>
+
+<div>
+    <label> WorkTime:
+        <span>{{poi.workTime}}</span>
+    </label>
+</div>
+
+
+<button class="btn btn-default" ui-sref="pois.edit({poiId:poi._id})">Edit</button>
+
+<button class="btn btn-default" ng-click="removePoi(poi._id)">Remove</button>
+

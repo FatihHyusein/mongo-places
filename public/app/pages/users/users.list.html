@@ -8,15 +8,15 @@
     <table class="table table-hover table-striped">
         <thead>
         <tr>
-            <th ng-click="getUsers({sort:'FullName'})">Full Name</th>
-            <th ng-click="getUsers({sort:'Username'})">Username</th>
-            <th ng-click="getUsers({sort:'Rating'})">Rating</th>
+            <th ng-click="getUsers({sort:'fullname'})">Full Name</th>
+            <th ng-click="getUsers({sort:'username'})">Username</th>
+            <th ng-click="getUsers({sort:'email'})">Email</th>
         </tr>
         </thead>
-        <tr ng-repeat="user in users" ui-sref="users.detail({id:user.Id})">
-            <td>{{user.FullName}}</td>
-            <td>{{user.Username}}</td>
-            <td>{{user.Rating.Rating}}</td>
+        <tr ng-repeat="user in users" ui-sref="users.detail({id:user._id})">
+            <td>{{user.fullname}}</td>
+            <td>{{user.username}}</td>
+            <td>{{user.email}}</td>
         </tr>
     </table>
 

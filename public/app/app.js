@@ -7,7 +7,7 @@ var BoxingApp = angular.module('boxing', [
         'ui.bootstrap',
         'boxing.login',
         'boxing.users',
-        'boxing.matches'
+        'boxing.pois'
     ])
     .config(['$stateProvider', '$urlRouterProvider', '$resourceProvider',
         function ($stateProvider, $urlRouterProvider, $resourceProvider) {
