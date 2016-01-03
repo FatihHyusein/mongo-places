@@ -35,7 +35,7 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li ng-class="{active: $state.includes('pois')}"><a ui-sref="pois.list">Pois</a></li>
+                <li ng-class="{active: $state.includes('pois')}"><a ui-sref="pois.searchForm">Pois</a></li>
                 <li ng-class="{active: $state.includes('users')}"><a ui-sref="users.list">Users</a></li>
             </ul>
             <form class="navbar-form navbar-left" role="search">
@@ -56,7 +56,12 @@
 </nav>
 <!-- END TOP NAVIGATION -->
 
-<div ui-view class="container slide" style="padding-top: 70px"></div>
+<div>
+    <div ng-controller="MapController" id="map" class="col-md-7" style="width:645px; height:645px"></div>
+
+    <div ui-view class="container slide col-md-5" style="padding-top: 70px"></div>
+</div>
+
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDoamLIoUZ1Ejx1Xuz_qcYzD2Te4S-S3a0"></script>
 

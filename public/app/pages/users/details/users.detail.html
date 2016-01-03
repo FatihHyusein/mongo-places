@@ -21,4 +21,5 @@
 <div ng-repeat="favPoi in user.favoritePlaces">
     <h3>{{favPoi.name}}</h3>
     <h4>{{favPoi.coordinates}}</h4>
+    <button ng-click="removeFromFavorites(favPoi._id)">Remove From Favorites</button>
 </div>

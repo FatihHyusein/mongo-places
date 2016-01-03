@@ -23,10 +23,32 @@ angular.module('boxing.pois', ['ui.router'])
                                 }]
                         },
 
-                        controller: ['$scope', 'gmapsSvc',
-                            function ($scope, gmapsSvc) {
-                                $scope.pois = [];
-                                gmapsSvc.refresh(39.50, -98.35);
+                        controller: ['$rootScope',
+                            function ($rootScope) {
+                                $rootScope.pois = [];
+                            }]
+                    })
+
+
+                    .state('pois.searchForm', {
+                        url: '',
+                        templateUrl: 'app/pages/pois/pois.searchForm.html',
+                        controller: ['$scope', '$rootScope', '$state', 'Poi',
+                            function ($scope, $rootScope, $state, Poi) {
+                                $scope.searchForm = {
+                                    name: '',
+                                    coordinates: [],
+                                    type: '',
+                                    workTime: []
+                                };
+
+                                $scope.getPois = function () {
+                                    Poi.getMany($scope.searchForm, function (res) {
+                                        $rootScope.pois = res;
+                                    });
+                                };
+
+                                $scope.getPois();
                             }]
                     })
 
@@ -62,7 +84,9 @@ angular.module('boxing.pois', ['ui.router'])
                                     }
 
                                     $scope.filters.skip = $scope.filters.take * currentPage;
-                                    $scope.pois = Poi.getMany($scope.filters);
+                                    Poi.getMany($scope.filters, function (res) {
+                                        $rootScope.pois = res;
+                                    });
                                 };
 
                                 $rootScope.search = function (searchInput) {
@@ -140,7 +164,9 @@ angular.module('boxing.pois', ['ui.router'])
                                 controller: ['$scope', '$stateParams', '$state', 'Poi',
                                     function ($scope, $stateParams, $state, Poi) {
                                         $scope.poi = {
-                                            coordinates:[]
+                                            coordinates: [],
+                                            workTime: [],
+                                            priceCategory: []
                                         };
 
                                         $scope.add = function () {

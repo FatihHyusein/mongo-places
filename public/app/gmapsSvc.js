@@ -1,24 +1,62 @@
 angular.module('gmapsModule', [])
-    .factory('gmapsSvc', ['Poi', function (Poi) {
+    .factory('gmapsSvc', ['$rootScope', 'Poi', 'User', '$compile', function ($rootScope, Poi, User, $compile) {
+
+        $rootScope.getAllFromThisType = function () {
+            Poi.getMany({
+                    customPath: 'sameType',
+                    customPathName: $rootScope.openedMarker.type
+                },
+                $rootScope.searchForm, function (res) {
+                    $rootScope.pois = res;
+                });
+        };
+
+        $rootScope.findClosest = function () {
+            Poi.getMany({
+                    customPath: 'closest',
+                    customPathName: [$rootScope.openedMarker.latlon.lng(), $rootScope.openedMarker.latlon.lat()]
+                },
+                $rootScope.searchForm, function (res) {
+                    $rootScope.pois = res;
+                });
+        };
+
+        $rootScope.findSimilar = function () {
+            Poi.getMany({
+                    customPath: 'similar',
+                    customPathName: $rootScope.openedMarker.priceCategory
+                },
+                $rootScope.searchForm, function (res) {
+                    $rootScope.pois = res;
+                });
+        };
+
+        $rootScope.addToFavorites = function () {
+            User.update({
+                    customPath: 'addToFavorites',
+                    customPathName: $rootScope.openedMarker.poiId
+                }
+            );
+        };
 
         var googleMapService = {};
-        googleMapService.clickLat  = 0;
+        googleMapService.clickLat = 0;
         googleMapService.clickLong = 0;
         var locations = [];
 
         var selectedLat = 39.50;
         var selectedLong = -98.35;
 
-        googleMapService.refresh = function (latitude, longitude) {
+        googleMapService.refresh = function (latitude, longitude, pois) {
             locations = [];
 
             selectedLat = latitude;
             selectedLong = longitude;
 
-            Poi.getMany(function (res) {
-                locations = convertToMapPois(res);
-                initialize(latitude, longitude);
-            });
+            if (pois) {
+                locations = convertToMapPois(pois);
+            }
+            initialize(latitude, longitude);
         };
 
         var convertToMapPois = function (response) {
@@ -29,10 +67,13 @@ angular.module('gmapsModule', [])
                 var currentPoi = response[i];
 
                 var contentString =
-                    '<p><b>Name</b>: ' + currentPoi.name +
+                    '<p id="mapPopup"><b>Name</b>: ' + currentPoi.name +
                     '<br><b>Type</b>: ' + currentPoi.type +
                     '<br><b>Coordinates</b>: ' + currentPoi.coordinates +
-                    '</p>';
+                    '<br><button ng-click="getAllFromThisType(currentPoi.type)">All from this type</button>' +
+                    '<br><button ng-click="findClosest(currentPoi.coordinates)">Closest 5</button>' +
+                    '<br><button ng-click="findSimilar(currentPoi)">Similar Pois</button>' +
+                    '<br><button ng-click="addToFavorites(currentPoi)">Add to favorites</button></p>';
 
                 locations.push({
                     latlon: new google.maps.LatLng(currentPoi.coordinates[1], currentPoi.coordinates[0]),
@@ -42,7 +83,10 @@ angular.module('gmapsModule', [])
                     }),
                     rating: currentPoi.rating,
                     workTime: currentPoi.workTime,
-                    description: currentPoi.description
+                    description: currentPoi.description,
+                    type: currentPoi.type,
+                    priceCategory: currentPoi.priceCategory,
+                    poiId: currentPoi._id
                 });
             }
 
@@ -71,6 +115,11 @@ angular.module('gmapsModule', [])
                 google.maps.event.addListener(marker, 'click', function (e) {
                     currentSelectedMarker = n;
                     n.message.open(map, marker);
+
+                    setTimeout(function () {
+                        $compile($('#mapPopup'))($rootScope);
+                        $rootScope.openedMarker = currentSelectedMarker;
+                    })
                 });
             });
 
@@ -86,7 +135,7 @@ angular.module('gmapsModule', [])
 
             map.panTo(new google.maps.LatLng(latitude, longitude));
 
-            google.maps.event.addListener(map, 'click', function(e){
+            google.maps.event.addListener(map, 'click', function (e) {
                 var marker = new google.maps.Marker({
                     position: e.latLng,
                     animation: google.maps.Animation.BOUNCE,
@@ -94,7 +143,7 @@ angular.module('gmapsModule', [])
                     icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
                 });
                 // When a new spot is selected, delete the old red bouncing marker
-                if(lastMarker){
+                if (lastMarker) {
                     lastMarker.setMap(null);
                 }
 
@@ -109,4 +158,10 @@ angular.module('gmapsModule', [])
             googleMapService.refresh(selectedLat, selectedLong));
 
         return googleMapService;
-    }]);
+    }])
+
+    .controller('MapController', ['$rootScope', '$scope', 'Poi',
+        function ($rootScope, $scope, Poi) {
+
+        }
+    ]);

@@ -23,17 +23,18 @@ angular.module('boxing.users', ['ui.router'])
                                 }]
                         },
 
-                        controller: ['$scope',
-                            function ($scope) {
+                        controller: ['$scope', '$rootScope',
+                            function ($scope, $rootScope) {
                                 $scope.users = [];
+                                $rootScope.pois = [];
                             }]
                     })
 
                     .state('users.list', {
                         url: '',
                         templateUrl: 'app/pages/users/users.list.html',
-                        controller: ['$scope','$rootScope', '$state', 'User',
-                            function ($scope,$rootScope, $state, User) {
+                        controller: ['$scope', '$rootScope', '$state', 'User',
+                            function ($scope, $rootScope, $state, User) {
                                 var currentPage = 0;
                                 $scope.filters = {
                                     skip: 0,
@@ -79,10 +80,13 @@ angular.module('boxing.users', ['ui.router'])
                         views: {
                             '': {
                                 templateUrl: 'app/pages/users/details/users.detail.html',
-                                controller: ['$scope', '$stateParams', 'User', '$state',
-                                    function ($scope, $stateParams, User, $state) {
-                                        $scope.user = User.getOne({
+                                controller: ['$scope', '$rootScope', '$stateParams', 'User', '$state',
+                                    function ($scope, $rootScope, $stateParams, User, $state) {
+                                        User.getOne({
                                             id: $stateParams.id
+                                        }, function (res) {
+                                            $scope.user = res;
+                                            $rootScope.pois = res.favoritePlaces;
                                         });
 
                                         $scope.removeUser = function (userId) {
@@ -91,6 +95,18 @@ angular.module('boxing.users', ['ui.router'])
                                             function successDelete(response) {
                                                 $state.go('users.list');
                                             }
+                                        };
+
+                                        $scope.removeFromFavorites = function (favPoiId) {
+                                            User.update({
+                                                    customPath: 'removeFromFavorites',
+                                                    customPathName: favPoiId
+                                                },
+                                                function (res) {
+                                                    $scope.user = res;
+                                                    $rootScope.pois = res.favoritePlaces;
+                                                }
+                                            );
                                         }
                                     }
                                 ]

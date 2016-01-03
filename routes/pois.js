@@ -10,13 +10,6 @@ var rm = require('../models/reqDataMapper');
 
 
 router.post('/', auth, function (req, res, next) {
-    console.log('****')
-    console.log(req.body.name)
-    console.log('****')
-    console.log(req.body.coordinates)
-    console.log('****')
-    console.log(req.body)
-
     if (!req.body.name || !req.body.coordinates || !req.body.type) {
         return res.status(400).json({message: 'Please fill out all fields'});
     }
@@ -43,14 +36,61 @@ router.get('/', function (req, res, next) {
     });
 });
 
+router.get('/sameType/:typeName', function (req, res, next) {
+    poiModel.Poi.
+    find({type: req.params.typeName}).
+    exec(function (err, pois) {
+        if (err) {
+            return next(err);
+        }
+        res.json(pois);
+    });
+});
+
+router.get('/closest/:coordinates', function (req, res, next) {
+    var coordinates = [
+        parseInt(req.params.coordinates.substring(0, req.params.coordinates.indexOf(','))),
+        parseInt(req.params.coordinates.substring(req.params.coordinates.indexOf(',') + 1, req.params.coordinates.length))
+    ];
+
+    poiModel.Poi.find().where('coordinates').near({center: coordinates, spherical: true})
+        .limit(6)
+        .exec(function (err, pois) {
+            if (err) {
+                return next(err);
+            }
+            res.json(pois);
+        });
+});
+
+
+router.get('/similar/:priceCategory', function (req, res, next) {
+    var priceCategory = [
+        parseInt(req.params.priceCategory.substring(0, req.params.priceCategory.indexOf(','))),
+        parseInt(req.params.priceCategory.substring(req.params.priceCategory.indexOf(',') + 1, req.params.priceCategory.length))
+    ];
+
+    poiModel.Poi.
+    find({priceCategory: {$gt: priceCategory[0], $lt: priceCategory[1]}}).
+    exec(function (err, pois) {
+        if (err) {
+            return next(err);
+        }
+        res.json(pois);
+    });
+});
+
+
 router.get('/:poiId', auth, function (req, res, next) {
     poiModel.Poi.findById(req.params.poiId, function (err, poi) {
         if (err) {
             return next(err);
         }
 
-        poi.populate('owner', function(err, p) {
-            if (err) { return next(err); }
+        poi.populate('owner', function (err, p) {
+            if (err) {
+                return next(err);
+            }
 
             res.json(p);
         });

@@ -1,0 +1,43 @@
+<div>
+    <label> Name:
+        <input type="text" ng-model="searchForm.name">
+    </label>
+</div>
+<div>
+    <label> Coordinates:
+        <input type="text" ng-model="searchForm.coordinates[0]">
+        <input type="text" ng-model="searchForm.coordinates[1]">
+    </label>
+</div>
+<div>
+    <label> Type:
+        <input type="text" ng-model="searchForm.type">
+    </label>
+</div>
+<div>
+    <label> WorkTime:
+        <input type="text" ng-model="searchForm.workTime[0]">
+        <input type="text" ng-model="searchForm.workTime[1]">
+    </label>
+</div>
+
+<div>
+    <label> Near:
+        <input type="number" ng-model="searchForm.nearInKm">
+    </label>
+</div>
+
+<div>
+    <label> TopFive:
+        <input type="checkbox" ng-model="searchForm.topFive">
+    </label>
+</div>
+
+<div>
+    <label> Find Similar:
+        <input type="checkbox" ng-model="searchForm.findSimilar">
+    </label>
+</div>
+
+<button class="btn btn-default" ng-click="getPois()">Search</button>
+<button class="btn btn-default" ui-sref="pois.add()">Add</button>

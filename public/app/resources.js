@@ -22,7 +22,11 @@ BoxingApp.factory("Login", function ($resource) {
 
 
     .factory("User", function ($resource) {
-        return $resource(url + "users/:id/", {id: "@id"},
+        return $resource(url + "users/:id/:customPath/:customPathName", {
+                id: "@id",
+                customPath: "@customPath",
+                customPathName: '@customPathName'
+            },
             {
                 'create': {
                     method: 'POST',
@@ -65,7 +69,11 @@ BoxingApp.factory("Login", function ($resource) {
     })
 
     .factory("Poi", function ($resource) {
-        return $resource(url + "pois/:poiId/", {poiId: "@poiId"},
+        return $resource(url + "pois/:poiId/:customPath/:customPathName", {
+                poiId: "@poiId",
+                customPath: "@customPath",
+                customPathName: '@customPathName'
+            },
             {
                 'create': {
                     method: 'POST',
