@@ -1,13 +1,14 @@
 'use strict';
 
-angular.module('boxing.login', ['ui.router'])
+angular.module('mongoPlaces.login', ['ui.router'])
 
     .config(['$stateProvider', '$urlRouterProvider',
         function ($stateProvider, $urlRouterProvider) {
             $urlRouterProvider
                 .when('/login/:id', '/logins/:id')
                 .when('/logins/:id', '/logins/:id')
-                .when('/register', '/register');
+                .when('/register', '/register')
+                .when('/logins', '/logins');
 
             $stateProvider
                 .state('logins', {

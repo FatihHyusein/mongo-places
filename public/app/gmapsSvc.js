@@ -44,8 +44,8 @@ angular.module('gmapsModule', [])
         googleMapService.clickLong = 0;
         var locations = [];
 
-        var selectedLat = 39.50;
-        var selectedLong = -98.35;
+        var selectedLat = 42.697708;
+        var selectedLong = 23.321868;
 
         googleMapService.refresh = function (latitude, longitude, pois) {
             locations = [];

@@ -1,43 +1,26 @@
-<div>
-    <label> Name:
-        <input type="text" ng-model="searchForm.name">
-    </label>
+<div class="form-group">
+    <label for="name" class="control-label"> Name:</label>
+    <input type="text" class="form-control" ng-model="searchForm.name" id="name">
 </div>
-<div>
-    <label> Coordinates:
-        <input type="text" ng-model="searchForm.coordinates[0]">
-        <input type="text" ng-model="searchForm.coordinates[1]">
-    </label>
+<div class="form-group">
+    <label for="coord" class="control-label"> Coordinates:</label>
+    <input type="text" class="form-control" ng-model="searchForm.coordinates[0]" id="coord" placeholder="Longitude">
+    <input type="text" class="form-control" ng-model="searchForm.coordinates[1]" placeholder="Latitude">
 </div>
-<div>
-    <label> Type:
-        <input type="text" ng-model="searchForm.type">
-    </label>
+<div class="form-group">
+    <label for="type" class="control-label"> Type:</label>
+    <input type="text" class="form-control" ng-model="searchForm.type" id="type">
 </div>
-<div>
-    <label> WorkTime:
-        <input type="text" ng-model="searchForm.workTime[0]">
-        <input type="text" ng-model="searchForm.workTime[1]">
-    </label>
+<div class="form-group">
+    <label for="wt" class="control-label"> WorkTime:</label>
+    <input type="text" class="form-control" ng-model="searchForm.workTime[0]" id="wt">
+    <input type="text" class="form-control" ng-model="searchForm.workTime[1]">
 </div>
 
-<div>
-    <label> Near:
-        <input type="number" ng-model="searchForm.nearInKm">
-    </label>
-</div>
-
-<div>
-    <label> TopFive:
-        <input type="checkbox" ng-model="searchForm.topFive">
-    </label>
-</div>
-
-<div>
-    <label> Find Similar:
-        <input type="checkbox" ng-model="searchForm.findSimilar">
-    </label>
+<div class="form-group">
+    <label class="control-label" for="near"> Near:</label>
+    <input type="number" class="form-control" ng-model="searchForm.nearInKm" id="near">
 </div>
 
 <button class="btn btn-default" ng-click="getPois()">Search</button>
-<button class="btn btn-default" ui-sref="pois.add()">Add</button>
+<a class="pull-right" ui-sref="pois.add()">Add</a>

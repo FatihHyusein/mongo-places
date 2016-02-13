@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('boxing.users', ['ui.router'])
+angular.module('mongoPlaces.users', ['ui.router'])
 
     .config(['$stateProvider', '$urlRouterProvider',
             function ($stateProvider, $urlRouterProvider) {

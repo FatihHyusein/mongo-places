@@ -1,19 +1,19 @@
 'use strict';
 
-var BoxingApp = angular.module('boxing', [
+var MongoPlacesApp = angular.module('mongoPlaces', [
         'ui.router',
         'ngAnimate',
         'ngResource',
         'ui.bootstrap',
-        'boxing.login',
-        'boxing.users',
-        'boxing.pois',
+        'mongoPlaces.login',
+        'mongoPlaces.users',
+        'mongoPlaces.pois',
         'gmapsModule'
     ])
     .config(['$stateProvider', '$urlRouterProvider', '$resourceProvider',
         function ($stateProvider, $urlRouterProvider, $resourceProvider) {
             $resourceProvider.defaults.stripTrailingSlashes = false;
-            //$urlRouterProvider.otherwise('/');
+            $urlRouterProvider.otherwise('/');
 
             $stateProvider
                 .state("home", {
@@ -26,6 +26,11 @@ var BoxingApp = angular.module('boxing', [
 
     .run(['$rootScope', '$state', '$stateParams', 'gmapsSvc',
         function ($rootScope, $state, $stateParams, gmapsSvc) {
+            $rootScope.viewMap = true;
+
+            $rootScope.changeView = function () {
+                $rootScope.viewMap = !$rootScope.viewMap;
+            };
             var authToken = localStorage.getItem('authToken');
             if (authToken && authToken != '') {
                 $rootScope.authToken = authToken;
@@ -42,10 +47,10 @@ var BoxingApp = angular.module('boxing', [
             });
 
 
-            $rootScope.$on("clicked", function(){
+            $rootScope.$on("clicked", function () {
 
                 // Run the gservice functions associated with identifying coordinates
-                $scope.$apply(function(){
+                $scope.$apply(function () {
                     console.log(parseFloat(gservice.clickLat).toFixed(3))
                     $scope.formData.latitude = parseFloat(gservice.clickLat).toFixed(3);
                     $scope.formData.longitude = parseFloat(gservice.clickLong).toFixed(3);

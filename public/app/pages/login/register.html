@@ -1,20 +1,30 @@
 <form ng-submit="register()">
-    <label>Username
-        <input type="text" ng-model="newUserData.username">
-    </label>
-    <label>Password
-        <input type="password" ng-model="newUserData.password">
-    </label>
-    <label>Confirm Password
-        <input type="password" ng-model="newUserData.confirmPassword">
-    </label>
-    <label>Full Name
-        <input type="text" ng-model="newUserData.fullname">
-    </label>
-    <label>Email
-        <input type="email" ng-model="newUserData.email">
-    </label>
-    <button>Register</button>
+    <div class="form-group">
+        <label for="username" class="control-label">Username:</label>
+        <input type="text" class="form-control" ng-model="newUserData.username" id="username">
+    </div>
+    <div class="form-group">
+        <label for="pwd" class="control-label">Password:</label>
+        <input type="password" class="form-control" id="pwd" ng-model="newUserData.password">
+    </div>
+
+    <div class="form-group">
+        <label for="cpwd" class="control-label">Confirm Password:</label>
+        <input type="password" class="form-control" id="cpwd" ng-model="newUserData.confirmPassword">
+    </div>
+
+    <div class="form-group">
+        <label for="fullname" class="control-label">Full Name:</label>
+        <input type="text" class="form-control" ng-model="newUserData.fullname" id="fullname">
+    </div>
+
+    <div class="form-group">
+        <label for="email" class="control-label">Email:</label>
+        <input type="email" class="form-control" ng-model="newUserData.email" id="email">
+    </div>
+
+    <button type="submit" class="btn btn-default">Register</button>
+
+    <a class="pull-right" ui-sref="logins">Login</a>
 </form>
 
-<button class="btn btn-default" ui-sref="logins">Login</button>

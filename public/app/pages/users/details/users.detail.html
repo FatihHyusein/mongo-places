@@ -16,10 +16,10 @@
 
 <button class="btn btn-default" ui-sref="users.edit({id:user._id})">Edit</button>
 
-<button class="btn btn-default" ng-click="removeUser(user._id)">Remove</button>
+<button class="btn btn-danger" ng-click="removeUser(user._id)">Remove</button>
 
 <div ng-repeat="favPoi in user.favoritePlaces">
     <h3>{{favPoi.name}}</h3>
     <h4>{{favPoi.coordinates}}</h4>
-    <button ng-click="removeFromFavorites(favPoi._id)">Remove From Favorites</button>
+    <button class="btn btn-danger" ng-click="removeFromFavorites(favPoi._id)">Remove From Favorites</button>
 </div>

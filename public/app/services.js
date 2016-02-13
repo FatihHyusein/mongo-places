@@ -1,4 +1,4 @@
-BoxingApp.factory('getUpdateDataSvc', [
+MongoPlacesApp.factory('getUpdateDataSvc', [
     function () {
         function getSendData(data) {
             var sendData = {};

@@ -1,5 +1,5 @@
 'use strict';
 
-BoxingApp.controller('HomeCtrl', [function() {
+MongoPlacesApp.controller('HomeCtrl', [function() {
 
 }]);

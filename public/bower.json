@@ -1,6 +1,5 @@
 {
-  "name": "Boxing",
-  "description": "Client for boxing web api",
+  "name": "Mongo Places",
   "version": "0.0.0",
   "private": true,
   "dependencies": {

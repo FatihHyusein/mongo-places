@@ -1,6 +1,6 @@
 var url = "http://localhost:3000/";
 
-BoxingApp.factory("Login", function ($resource) {
+MongoPlacesApp.factory("Login", function ($resource) {
         return $resource(url + "logins/:id", {id: "@_id"},
             {
                 'create': {

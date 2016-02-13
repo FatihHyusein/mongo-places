@@ -1,14 +1,11 @@
-<div>
-    <label> Full Name:
-        <input type="text" ng-model="user.fullname">
-    </label>
+<div class="form-group">
+    <label for="fullname" class="control-label">Full Name:</label>
+    <input type="text" class="form-control" ng-model="user.fullname" id="fullname">
 </div>
 
-<div>
-    <label> Email:
-        <input type="text" ng-model="user.email">
-    </label>
+<div class="form-group">
+    <label for="email" class="control-label">Email:</label>
+    <input type="email" class="form-control" ng-model="user.email" id="email">
 </div>
 
-
-<button class="btn btn-default" ng-click="updateUser()">Save</button>
+<button class="btn btn-success" ng-click="updateUser()">Save</button>

@@ -71,7 +71,7 @@ router.get('/similar/:priceCategory', function (req, res, next) {
     ];
 
     poiModel.Poi.
-    find({priceCategory: {$gt: priceCategory[0], $lt: priceCategory[1]}}).
+    find({$and: [{"priceCategory.0": {$gte: priceCategory[0]}}, {"priceCategory.1": {$lte: priceCategory[1]}}]}).
     exec(function (err, pois) {
         if (err) {
             return next(err);

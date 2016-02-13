@@ -1,35 +1,30 @@
-<div>
-    <label> Name:
-        <input type="text" ng-model="poi.name">
-    </label>
-</div>
-<div>
-    <label> Coordinates:
-        <input type="text" ng-model="poi.coordinates[0]">
-        <input type="text" ng-model="poi.coordinates[1]">
-    </label>
-</div>
-<div>
-    <label> Type:
-        <input type="text" ng-model="poi.type">
-    </label>
-</div>
-<div>
-    <label> Description:
-        <input type="text" ng-model="poi.description">
-    </label>
-</div>
-<div>
-    <label> WorkTime:
-        <input type="text" ng-model="poi.workTime[0]">
-        <input type="text" ng-model="poi.workTime[1]">
-    </label>
-</div>
-<div>
-    <label> Price Category:
-        <input type="text" ng-model="poi.priceCategory[0]">
-        <input type="text" ng-model="poi.priceCategory[1]">
-    </label>
+<div class="form-group">
+    <label for="name" class="control-label">Name:</label>
+    <input type="text" class="form-control" ng-model="poi.name" id="name">
 </div>
 
-<button class="btn btn-default" ng-click="add()">Save</button>
+<div class="form-group">
+    <label class="control-label" for="coordinates"> Coordinates:</label>
+    <input class="form-control" type="text" ng-model="poi.coordinates[0]" id="coordinates" placeholder="Longitude">
+    <input class="form-control" type="text" ng-model="poi.coordinates[1]" placeholder="Latitude">
+</div>
+<div class="form-group">
+    <label for="type" class="control-label">Type:</label>
+    <input id="type" class="form-control" type="text" ng-model="poi.type">
+</div>
+<div class="form-group">
+    <label class="control-label" for="desc"> Description:</label>
+    <input type="text" class="form-control" ng-model="poi.description" id="desc">
+</div>
+<div class="form-group">
+    <label class="control-label" for="worktime"> WorkTime: </label>
+    <input type="number" class="form-control" ng-model="poi.workTime[0]" id="worktime">
+    <input type="number" class="form-control" ng-model="poi.workTime[1]">
+</div>
+<div class="form-group">
+    <label class="control-label" for="price"> Price Category:</label>
+    <input type="number" class="form-control" ng-model="poi.priceCategory[0]" id="price">
+    <input type="number" class="form-control" ng-model="poi.priceCategory[1]">
+</div>
+
+<button class="btn btn-success" ng-click="add()">Save</button>
