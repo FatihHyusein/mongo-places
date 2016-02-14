@@ -29,7 +29,7 @@ angular.module('mongoPlaces.login', ['ui.router'])
             $scope.login = function () {
                 Login.create({},
                     $.param({
-                        username: $scope.username,
+                        email: $scope.email,
                         password: $scope.password
                     }), successLogin, failLogin
                 );

@@ -1,8 +1,9 @@
 <form ng-submit="register()">
     <div class="form-group">
-        <label for="username" class="control-label">Username:</label>
-        <input type="text" class="form-control" ng-model="newUserData.username" id="username">
+        <label for="email" class="control-label">Email:</label>
+        <input type="email" class="form-control" ng-model="newUserData.email" id="email">
     </div>
+
     <div class="form-group">
         <label for="pwd" class="control-label">Password:</label>
         <input type="password" class="form-control" id="pwd" ng-model="newUserData.password">
@@ -16,11 +17,6 @@
     <div class="form-group">
         <label for="fullname" class="control-label">Full Name:</label>
         <input type="text" class="form-control" ng-model="newUserData.fullname" id="fullname">
-    </div>
-
-    <div class="form-group">
-        <label for="email" class="control-label">Email:</label>
-        <input type="email" class="form-control" ng-model="newUserData.email" id="email">
     </div>
 
     <button type="submit" class="btn btn-default">Register</button>

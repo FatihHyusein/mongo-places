@@ -9,14 +9,13 @@ var poiModel = require('../models/Pois');
 
 
 router.post('/', function (req, res, next) {
-    if (!req.body.username || !req.body.password) {
+    if (!req.body.email || !req.body.password) {
         return res.status(400).json({message: 'Please fill out all fields'});
     }
 
     var user = new userModel.User();
-    user.username = req.body.username;
-    user.fullname = req.body.fullname;
     user.email = req.body.email;
+    user.fullname = req.body.fullname;
 
     user.setPassword(req.body.password);
 
