@@ -1,7 +1,7 @@
 logs/*
 !.gitkeep
 public/lib/
-/node_modules
+node_modules
 tmp
 .DS_Store
-/.idea
+.idea
