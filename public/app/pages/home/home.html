@@ -1,1 +1,7 @@
-<h1>home</h1>
+<h3>Show most added pois as favorites</h3>
+
+<label for="types" class="control-label">Choose type:</label>
+<select id="types" class="form-control" ng-change="getMostLiked()" ng-model="selected">
+    <option value="all">All</option>
+    <option ng-repeat="type in poiTypes" ng-selected="type == selected">{{type}}</option>
+</select>

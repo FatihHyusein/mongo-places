@@ -70,6 +70,7 @@ angular.module('gmapsModule', [])
                     '<p id="mapPopup"><b>Name</b>: ' + currentPoi.name +
                     '<br><b>Type</b>: ' + currentPoi.type +
                     '<br><b>Coordinates</b>: ' + currentPoi.coordinates +
+                    '<br><b>In Favorites</b>: ' + currentPoi.inFavoritesCounter +
                     '<br><button ng-click="getAllFromThisType(currentPoi.type)">All from this type</button>' +
                     '<br><button ng-click="findClosest(currentPoi.coordinates)">Closest 5</button>' +
                     '<br><button ng-click="findSimilar(currentPoi)">Similar Pois</button>' +

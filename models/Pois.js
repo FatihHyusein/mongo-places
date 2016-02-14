@@ -14,7 +14,8 @@ var PoiSchema = new mongoose.Schema({
     priceCategory: [Number],
     seatsCount: Number,
     additionalInformation: String,
-    owner: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
+    owner: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+    inFavoritesCounter: Number
 });
 
 //PoiSchema.pre('save', function (next) {

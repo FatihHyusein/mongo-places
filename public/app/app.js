@@ -40,10 +40,10 @@ var MongoPlacesApp = angular.module('mongoPlaces', [
                 $rootScope.loggedInUser = false;
             }
 
-            gmapsSvc.refresh(39.50, -98.35);
+            gmapsSvc.refresh(42.697708, 23.321868);
 
             $rootScope.$watch('pois', function () {
-                gmapsSvc.refresh(39.50, -98.35, $rootScope.pois);
+                gmapsSvc.refresh(42.697708, 23.321868, $rootScope.pois);
             });
 
 

@@ -47,6 +47,36 @@ router.get('/sameType/:typeName', function (req, res, next) {
     });
 });
 
+router.get('/mostLiked/:typeName', function (req, res, next) {
+    var types = [];
+    poiModel.Poi.
+    distinct("type").
+    exec(function (err, tp) {
+        if (err) {
+            return next(err);
+        }
+        types = tp;
+    });
+
+    var searchObject = {};
+    if (req.params.typeName != 'all') {
+        searchObject = {type: req.params.typeName}
+    }
+
+    poiModel.Poi.
+    find(searchObject).
+    sort({inFavoritesCounter: -1}).limit(3).
+    exec(function (err, pois) {
+        if (err) {
+            return next(err);
+        }
+        res.json([{
+            pois: pois,
+            types: types
+        }]);
+    });
+});
+
 router.get('/closest/:coordinates', function (req, res, next) {
     var coordinates = [
         parseInt(req.params.coordinates.substring(0, req.params.coordinates.indexOf(','))),

@@ -12,6 +12,9 @@ router.post('/', function (req, res, next) {
     if (!req.body.email || !req.body.password) {
         return res.status(400).json({message: 'Please fill out all fields'});
     }
+    else if (req.body.password !== req.body.confirmPassword) {
+        return res.status(400).json({message: 'Password with confirm password does not match'});
+    }
 
     var user = new userModel.User();
     user.email = req.body.email;
@@ -86,8 +89,28 @@ router.put('/addToFavorites/:poiId', auth, function (req, res, next) {
                 if (err) {
                     return next(err);
                 }
-                res.json(usr);
-            })
+
+                poiModel.Poi.findById(req.params.poiId,
+                    function (err, poi) {
+                        if (err) {
+                            return next(err);
+                        }
+
+                        if (poi.inFavoritesCounter) {
+                            poi.inFavoritesCounter++;
+                        }
+                        else {
+                            poi.inFavoritesCounter = 1;
+                        }
+
+                        poi.save(function () {
+                            if (err) {
+                                return next(err);
+                            }
+                            res.json(usr);
+                        });
+                    });
+            });
         });
 });
 
@@ -114,7 +137,20 @@ router.put('/removeFromFavorites/:poiId', auth, function (req, res, next) {
                         return next(err);
                     }
 
-                    res.json(u);
+                    poiModel.Poi.findById(req.params.poiId,
+                        function (err, poi) {
+                            if (err) {
+                                return next(err);
+                            }
+
+                            poi.inFavoritesCounter--;
+                            poi.save(function () {
+                                if (err) {
+                                    return next(err);
+                                }
+                                res.json(u);
+                            });
+                        });
                 });
             })
         });
